@@ -70,4 +70,4 @@ theme: yilia
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/xxmyjk/xxmyjk.github.io.git
+  repo: git@github.com:xxmyjk/xxmyjk.github.io.git
