@@ -23,6 +23,8 @@ tags: [运维, nodejs, Jenkins, CI]
 
 ## 环境搭建
 
+<!-- more -->
+
 * **docker安装**
     docker原本是由 `LXC(linux 内核虚拟化技术)` 而来, 所以早期的时候在不同平台上的实现方式不太一样, 在 `1.0` 版本之前, windows平台和
     mac平台上的docker都是使用`virtual box`虚拟机运行一个linux环境, 然后通过ssh进入linux环境实现的虚拟, 本质上类似于 `vagrant` + `docker
