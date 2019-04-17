@@ -32,6 +32,8 @@ sudo yum-config-manager \
     https://download.docker.com/linux/centos/docker-ce.repo
 ```
 
+<!-- more -->
+
 - install docker-ce
 ```
 sudo yum install docker-ce docker-ce-cli containerd.io
@@ -47,8 +49,6 @@ sudo vi /usr/lib/systemd/system/docker.service
 
 > append --data-root <a large disk portion> behind dockerd Exec
 ```
-
-<!-- more -->
 
 ## nvidia-docker | nvidia-container-runtime installation
 
