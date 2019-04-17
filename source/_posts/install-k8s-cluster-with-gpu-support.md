@@ -37,6 +37,17 @@ sudo yum-config-manager \
 sudo yum install docker-ce docker-ce-cli containerd.io
 ```
 
+- optional: setup docker `data-root`
+
+`dockerd` store `images/caches/volumes ...` data in `/var/lib/docker` by default, and the `kuberntes` will GC docker
+image NOT CURRENT IN USING, change the `data-root` to a large disk portion.
+
+```
+sudo vi /usr/lib/systemd/system/docker.service
+
+> append --data-root <a large disk portion> behind dockerd Exec
+```
+
 <!-- more -->
 
 ## nvidia-docker | nvidia-container-runtime installation
@@ -58,7 +69,7 @@ sudo pkill -SIGHUP dockerd
 
 - optional: setup your own `shadowsocks server & client & privoxy`
 
-- modify `/lib/systemd/system/docker.server` to enable docker image pull access to `gcr.io`
+- modify `/usr/lib/systemd/system/docker.server` to enable docker image pull access to `gcr.io`
 
 ```
 Environment="HTTP_PROXY=x.x.x.x:xx;HTTPS_PROXY=x.x.x.x:xx;NO_PROXY=x.x.x.x:xx"
