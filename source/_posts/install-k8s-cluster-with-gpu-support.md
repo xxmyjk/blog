@@ -1,7 +1,7 @@
 ---
 title: 支持 GPU 调度的 kubernetes 部署方案(CentOS)
 date: 2019-04-16 15:12:47
-tags:
+tags: [kubernetes, linux, 运维]
 ---
 ## docker installation
 

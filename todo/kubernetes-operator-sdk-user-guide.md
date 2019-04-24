@@ -1,7 +1,7 @@
 ---
 title: kubernetes operator-sdk 使用指北
 date: 2019-04-19 14:53:51
-tags:
+tags: [kubernetes, linux, 运维]
 ---
 
 使用 [operator-sdk](https://github.com/operator-framework/operator-sdk) 开发 `kubernetes-operator` 刨坑记录.
