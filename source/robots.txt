@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Allow: /tags/
+Allow: /categories/
+Allow: /archives/
+
+Sitemap: https://blog.geeek.info/sitemap.xml
+Sitemap: https://blog.geeek.info/baidusitemap.xml
