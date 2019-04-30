@@ -4,5 +4,5 @@ Allow: /tags/
 Allow: /categories/
 Allow: /archives/
 
-Sitemap: https://blog.geeek.info/sitemap.xml
-Sitemap: https://blog.geeek.info/baidusitemap.xml
+Sitemap: https://blog.github.pub/sitemap.xml
+Sitemap: https://blog.github.pub/baidusitemap.xml
