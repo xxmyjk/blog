@@ -44,18 +44,16 @@ categories: [机器学习, 转载]
 
 $$
 f(z)=\begin{cases}
-1 \quad z\gt 0 \\
-\\
-0 \quad othercase \\
-\end{cases}
-\tag{1}
+    1 \quad z\gt 0 \\
+    \\
+    0 \quad othercase \\
+\end{cases} \tag{1}
 $$
 
 - **输出** 感知器的输出由下面这个公式来计算
 
 $$
-y = f(w \bullet x + b)
-\tag{公式1}
+    y = f(w \bullet x + b) \tag{公式1}
 $$
 
 如果看完上面的公式一下子就晕了，不要紧，我们用一个简单的例子来帮助理解。
@@ -78,13 +76,13 @@ $$
 输入上面真值表的第一行，即$x_1 = 0; x_2 = 0$，那么根据公式(1)，计算输出： 
 
 $$
-\begin{align*}
-y &= f(w \bullet x + b)\tag{2} \\
-&= f(w_1 x_1 + w_2 x_2 + b )\tag{3} \\
-&= f(0.5 \times 0 + 0.5 \times 0 - 0.8)\tag{4} \\
-&= f(-0.8)\tag{5} \\
-&= 0\tag{6}
-\end{align*}
+\begin{aligned}
+    y &= f(w \bullet x + b) &\pod{2} \\
+    &= f(w_1 x_1 + w_2 x_2 + b ) &\pod{3} \\
+    &= f(0.5 \times 0 + 0.5 \times 0 - 0.8) &\pod{4} \\
+    &= f(-0.8) &\pod{5} \\
+    &= 0 &\pod{6}
+\end{aligned}
 $$
 
 也就是当 $x_1 x_2$ 都为0的时候，$y$ 为0，这就是 **真值表** 的第一行。读者可以自行验证上述真值表的第二、三、四行。
@@ -103,13 +101,13 @@ $$
 我们来验算第二行，这时的输入是 $x_1 = 0; x_2 = 1$ ，带入公式(1)：
 
 $$
-\begin{align*}
-y &= f(w \bullet x + b)\tag{7} \\
-&= f(w_1 x_1 + w_2 x_2 + b )\tag{8} \\
-&= f(0.5 \times 0 + 0.5 \times 1 - 0.3)\tag{9} \\
-&= f(0.2)\tag{10} \\
-&= 1\tag{11}
-\end{align*}
+\begin{aligned}
+    y &= f(w \bullet x + b) &\pod{7} \\
+    &= f(w_1 x_1 + w_2 x_2 + b ) &\pod{8} \\
+    &= f(0.5 \times 0 + 0.5 \times 1 - 0.3) &\pod{9} \\
+    &= f(0.2) &\pod{10} \\
+    &= 1 &\pod{11}
+\end{aligned}
 $$
 
 也就是当 $x_1 = 0; x_2 = 1$ 时， $y$ 为1，即`or` **真值表** 第二行。读者可以自行验证其它行。
@@ -129,19 +127,19 @@ $$
 现在，你可能困惑前面的权重项和偏置项的值是如何获得的呢？这就要用到感知器训练算法：将权重项和偏置项初始化为0，然后，利用下面的 **感知器规则** 迭代的修改 $w_i$ 和 $b$ ，直到训练完成。
 
 $$
-\begin{align*}
-w_i &\gets w_i + \Delta w_i \tag{12} \\
-b &\gets b + \Delta b \tag{13}
-\end{align*}
+\begin{aligned}
+    w_i &\gets w_i + \Delta w_i  &\pod{12} \\
+    b &\gets b + \Delta b  &\pod{13}
+\end{aligned}
 $$
 
 其中: 
 
 $$
-\begin{align*}
-\Delta w_i &= \eta(t-y)x_i \tag{14} \\
-\Delta b &= \eta(t-y) \tag{15}
-\end{align*}
+\begin{aligned}
+    \Delta w_i &= \eta(t-y)x_i  &\pod{14} \\
+    \Delta b &= \eta(t-y)  &\pod{15}
+\end{aligned}
 $$
 
  $w_i$ 是与输入 $x_i$ 对应的权重项， $b$ 是偏置项。事实上，可以把 $b$ 看作是值永远为1的输入 $x_b$ 所对应的权重。 $t$ 是训练样本的`实际值`，一般称之为`label`。而是 $y$ 感知器的输出值，它是根据 **公式(1)** 计算得出。 $\eta$ 是一个称为 **学习速率** 的常数，其作用是控制每一步调整权的幅度。
