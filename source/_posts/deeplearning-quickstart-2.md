@@ -6,7 +6,7 @@ tags: [机器学习, 深度学习入门]
 categories: [机器学习, 转载]
 ---
 
-![](http://upload-images.jianshu.io/upload_images/2256672-06627c71f0d8c0dc.jpg)
+![](/static/upload-images.jianshu.io/upload_images/2256672-06627c71f0d8c0dc.jpg)
 
 > 无论即将到来的是大数据时代还是人工智能时代，亦或是传统行业使用人工智能在云上处理大数据的时代，作为一个有理想有追求的程序员，
 不懂深度学习（Deep Learning）这个超热的技术，会不会感觉马上就out了？现在救命稻草来了，《零基础入门深度学习》
@@ -36,11 +36,11 @@ $$
 
 这样的线性单元如下图所示
 
-![](http://upload-images.jianshu.io/upload_images/2256672-f57602e423d739ee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](/static/upload-images.jianshu.io/upload_images/2256672-f57602e423d739ee.png)
 
 对比此前我们讲过的感知器
 
-![](http://upload-images.jianshu.io/upload_images/2256672-801d65e79bfc3162.png)
+![](/static/upload-images.jianshu.io/upload_images/2256672-801d65e79bfc3162.png)
 
 这样替换了激活函数 $f$ 之后， **线性单元** 将返回一个 **实数值** 而不是 **0,1分类** 。因此线性单元用来解决 **回归** 问题而不是 **分类** 问题。
 
@@ -161,7 +161,7 @@ $$
 
 不过对于计算机来说，它可不会解方程。但是它可以凭借强大的计算能力，一步一步的去把函数的极值点『试』出来。如下图所示：
 
-![](http://upload-images.jianshu.io/upload_images/2256672-46acc2c2d52fc366.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480)
+![](/static/upload-images.jianshu.io/upload_images/2256672-46acc2c2d52fc366.png)
 
 首先，我们随便选择一个点开始，比如上图的 $x_0$ 点。接下来，每次迭代修改 $x$ 为 $x_1, x_2, x_3, \dots$ ，经过数次迭代后最终达到函数最小值点。
 
@@ -235,3 +235,186 @@ $$
 如果您还是没看明白，建议您也吐血再看一下大学时学过的《线性代数》吧。
 
 ### $\nabla E(\mathrm{w})$ 的推导
+
+这一节你尽可以跳过它，并不太会影响到全文的理解。当然如果你非要弄明白每个细节，那恭喜你骚年，机器学习的未来一定是属于你的。
+
+首先，我们先做一个简单的前戏。我们知道函数的梯度的定义就是它相对于各个变量的 **偏导数** ，所以我们写下下面
+的式子
+
+$$
+\begin{aligned}
+    \nabla E(\mathrm{w})
+    &= \frac{\partial}{\partial \mathrm{w}} E(\mathrm{w}) &\pod{10} \\
+    &= \frac{\partial}{\partial \mathrm{w}} \frac{1}{2} \sum \limits_{i=1}^{n} (y^{(i)} -\bar{y}^{(i)})^2 &\pod{11}
+
+\end{aligned}
+$$
+
+可接下来怎么办呢？我们知道和的导数等于导数的和，所以我们可以先把求和符号 $\sum$ 里面的导数求出来，然后再把它们加在一起就行了，也就是
+
+$$
+\begin{aligned}
+    \frac{\partial}{\partial \mathrm{w}} \frac{1}{2} \sum \limits_{i=1}^{n} (y^{(i)} -\bar{y}^{(i)})^2 &\pod{12} \\
+    = \frac{1}{2} \sum \limits_{i=1}^{n} \frac{\partial}{\partial \mathrm{w}} (y^{(i)} -\bar{y}^{(i)})^2 &\pod{13}
+\end{aligned}
+$$
+
+现在我们可以不管高大上的 $\sum$ 了，先专心把里面的导数求出来。
+
+$$
+\begin{aligned}
+    \frac{\partial}{\partial \mathrm{w}} (y^{(i)} -\bar{y}^{(i)})^2 &\pod{14} \\
+    = \frac{\partial}{\partial \mathrm{w}} (y^{(i)2} - 2\bar{y}^{(i)} y^{(i)} + \bar{y}^{(i)2}) &\pod{15}
+\end{aligned}
+$$
+
+我们知道， $y$ 是与 $\mathrm{w}$ 无关的常数，而 $\bar{y} = \mathrm{w}^T \mathrm{x}$ ，下面我们根据链式求导法则来求导(上大学时好像叫复合函数求导法则)
+
+$$
+\frac{\partial E(\mathrm{w})}{\partial \mathrm{w}} = \frac{\partial E(\bar{y})}{\partial \bar{y}} \frac{\partial \bar{y}}{\partial \mathrm{w}}
+$$
+
+我们分别计算上式等号右边的两个偏导数
+
+$$
+\begin{aligned}
+    \frac{\partial E(\mathrm{w})}{\partial \bar{y}}
+    &= \frac{\partial}{\partial \bar{y}} (y^{(i)2} - 2\bar{y}^{(i)} y^{(i)} + \bar{y}^{(i)2}) &\pod{16} \\
+    &= -2y^{(i)} + 2\bar{y}^{(i)} &\pod{17}
+\end{aligned}
+$$
+
+>注: 此处原文应该是作者公式错误多写了一个方程编号, 不影响后续, 移除编号 **(18)**
+
+$$
+\begin{aligned}
+    \frac{\partial \bar{y}}{\partial \mathrm{w}}
+    &= \frac{\partial}{\partial \mathrm{w}} \mathrm{w}^T \mathrm{x} &\pod{19} \\
+    &= \mathrm{x} &\pod{20}
+\end{aligned}
+$$
+
+代入，我们求得 $\sum$ 里面的偏导数是
+
+$$
+\begin{aligned}
+    \frac{\partial}{\partial \mathrm{w}} (y^{(i)} -\bar{y}^{(i)})^2 &\pod{21} \\
+    = 2(-y^{(i) + \bar{y}^{(i)}})\mathrm{x} &\pod{22}
+\end{aligned}
+$$
+
+最后代入 $\nabla E(\mathrm{w})$ ，求得
+
+$$
+\begin{aligned}
+    \nabla E(\mathrm{w})
+    &= \frac{1}{2} \sum \limits_{i=1}^{n} \frac{\partial}{\partial \mathrm{w}} (y^{(i)} -\bar{y}^{(i)})^2 &\pod{23} \\
+    &= \frac{1}{2} \sum \limits_{i=1}^{n} \frac{\partial}{\partial \mathrm{w}} 2(-y^{(i)} +\bar{y}^{(i)}) \mathrm{x} &\pod{24} \\
+    &= - \sum \limits_{i=1}^{n} (y^{(i)} - \bar{y}^{(i)}) \mathrm{x} &\pod{25}
+\end{aligned}
+$$
+
+至此，大功告成。
+
+### 随机梯度下降算法(Stochastic Gradient Descent, SGD)
+
+如果我们根据(式3)来训练模型，那么我们每次更新 $\mathrm{w}$ 的迭代，要遍历训练数据中所有的样本进行计算，我们称这种算法叫做 **批梯度下降(Batch Gradient Descent)** 。如果我们的样本非常大，比如数百万到数亿，那么计算量异常巨大。因此，实用的算法是SGD算法。在SGD算法中，每次更新 $\mathrm{w}$ 的迭代，只计算一个样本。这样对于一个具有数百万样本的训练数据，完成一次遍历就会对 $\mathrm{w}$ 更新数百万次，效率大大提升。由于样本的噪音和随机性，每次更新 $\mathrm{w}$ 并不一定按照减少 $E$ 的方向。然而，虽然存在一定随机性，大量的更新总体上沿着减少 $E$ 的方向前进的，因此最后也能收敛到最小值附近。下图展示了SGD和BGD的区别
+
+![](/static/upload-images.jianshu.io/upload_images/2256672-3152002d503d768e.png)
+
+如上图，椭圆表示的是函数值的等高线，椭圆中心是函数的最小值点。红色是BGD的逼近曲线，而紫色是SGD的逼近曲线。我们可以看到BGD是一直向着最低点前进的，而SGD明显躁动了许多，但总体上仍然是向最低点逼近的。
+
+最后需要说明的是，SGD不仅仅效率高，而且随机性有时候反而是好事。今天的目标函数是一个『凸函数』，沿着梯度反方向就能找到全局唯一的最小值。然而对于非凸函数来说，存在许多局部最小值。随机性有助于我们逃离某些很糟糕的局部最小值，从而获得一个更好的模型。
+
+## 实现线性单元
+
+>完整代码请参考GitHub: https://github.com/hanbt/learn_dl/blob/master/linear_unit.py (python2.7)
+
+接下来，让我们撸一把代码。
+
+因为我们已经写了感知器的代码，因此我们先比较一下感知器模型和线性单元模型，看看哪些代码能够复用。
+
+| **算法** | **感知器** | **线性单元** |
+| ----- | ----- | --- |
+| 模型 $h(x)$ | $y=f(\mathrm{w}^T \mathrm{x})$ | $y=f(\mathrm{w}^T \mathrm{x})$ |
+||$f(z)=\begin{cases} 1 \quad z \gt 0 \\ 0 \quad otherwise \end{cases}$| $f(z)=z$ |
+| 训练规则 | $\mathrm{w} \leftarrow \mathrm{w} + \eta (y-\bar{y})\mathrm{x}$ | $\mathrm{w} \leftarrow \mathrm{w} + \eta (y-\bar{y})\mathrm{x}$ |
+
+比较的结果令人震惊，原来除了激活函数不同之外，两者的模型和训练规则是一样的(在上表中，线性单元的优化算法是SGD算法)。那么，我们只需要把感知器的激活函数进行替换即可。感知器的代码请参考上一篇文章[零基础入门深度学习(1) - 感知器](/2019/05/01/deeplearning-quickstart-1/)，这里就不再重复了。对于一个养成良好习惯的程序员来说，重复代码是不可忍受的。大家应该把代码保存在一个代码库中(比如git)。
+
+```python
+from perceptron import Perceptron
+#定义激活函数f
+f = lambda x: x
+class LinearUnit(Perceptron):
+    def __init__(self, input_num):
+        '''初始化线性单元，设置输入参数的个数'''
+        Perceptron.__init__(self, input_num, f)
+```
+
+通过继承Perceptron，我们仅用几行代码就实现了线性单元。这再次证明了面向对象编程范式的强大。
+
+接下来，我们用简单的数据进行一下测试。
+
+```python
+def get_training_dataset():
+    '''
+    捏造5个人的收入数据
+    '''
+    # 构建训练数据
+    # 输入向量列表，每一项是工作年限
+    input_vecs = [[5], [3], [8], [1.4], [10.1]]
+    # 期望的输出列表，月薪，注意要与输入一一对应
+    labels = [5500, 2300, 7600, 1800, 11400]
+    return input_vecs, labels    
+def train_linear_unit():
+    '''
+    使用数据训练线性单元
+    '''
+    # 创建感知器，输入参数的特征数为1（工作年限）
+    lu = LinearUnit(1)
+    # 训练，迭代10轮, 学习速率为0.01
+    input_vecs, labels = get_training_dataset()
+    lu.train(input_vecs, labels, 10, 0.01)
+    #返回训练好的线性单元
+    return lu
+if __name__ == '__main__': 
+    '''训练线性单元'''
+    linear_unit = train_linear_unit()
+    # 打印训练获得的权重
+    print linear_unit
+    # 测试
+    print 'Work 3.4 years, monthly salary = %.2f' % linear_unit.predict([3.4])
+    print 'Work 15 years, monthly salary = %.2f' % linear_unit.predict([15])
+    print 'Work 1.5 years, monthly salary = %.2f' % linear_unit.predict([1.5])
+    print 'Work 6.3 years, monthly salary = %.2f' % linear_unit.predict([6.3])
+```
+
+程序运行结果如下图
+
+![](/static/upload-images.jianshu.io/upload_images/2256672-92f00082e3db32d2.png)
+
+拟合的直线如下图
+
+![](/static/upload-images.jianshu.io/upload_images/2256672-b2db886ef2f18771.png)
+
+## 小结
+
+事实上，一个机器学习算法其实只有两部分
+
+- *模型* 从输入特征 $\mathrm{x}$ 预测输入 $y$ 的那个函数 $h(x)$
+- *目标函数* 目标函数取最小(最大)值时所对应的参数值，就是模型的参数的 **最优值** 。很多时候我们只能获得目标函数的 **局部最小(最大)值** ，因此也只能得到模型参数的局部最优值。
+
+因此，如果你想最简洁的介绍一个算法，列出这两个函数就行了。
+
+接下来，你会用 **优化算法** 去求取目标函数的最小(最大)值。**[随机]梯度{下降|上升}** 算法就是一个 **优化算法** 。针对同一个目标函数，不同的 **优化算法** 会推导出不同的训练规则。我们后面还会讲其它的优化算法。
+
+其实在机器学习中，算法往往并不是关键，真正的关键之处在于选取特征。选取特征需要我们人类对问题的深刻理解，经验、以及思考。而 **神经网络** 算法的一个优势，就在于它能够自动学习到应该提取什么特征，从而使算法不再那么依赖人类，而这也是神经网络之所以吸引人的一个方面。
+
+现在，经过漫长的烧脑，你已经具备了学习 **神经网络** 的必备知识。下一篇文章，我们将介绍本系列文章的主角： **神经网络** ，以及用来训练神经网络的大名鼎鼎的算法： **反向传播** 算法。至于现在，我们应该暂时忘记一切，尽情奖励自己一下吧。
+
+> 注: 去掉原作者爱吃的红烧肉 ->_->
+
+## 参考资料
+
+1. Tom M. Mitchell, "机器学习", 曾华军等译, 机械工业出版社
