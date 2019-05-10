@@ -14,7 +14,7 @@ top: true
 
 -  <a href="/2019/05/03/deeplearning-quickstart-2/" target="_blank">零基础入门深度学习(2) - 线性单元和梯度下降</a>
 
-- 零基础入门深度学习(3) - 神经网络和反向传播算法
+-  <a href="/2019/05/08/deeplearning-quickstart-3/" target="_blank">零基础入门深度学习(3) - 神经网络和反向传播算法</a>
 
 - 零基础入门深度学习(4) - 卷积神经网络
 
